@@ -95,13 +95,13 @@ void CreateList_L(LinkList L,int n)         //后插法创建链表
     }
 }
 
-int jia(LinkList L,ElemType e,int jyz)
+int jia(LinkList L,ElemType e,int jyz)      //为学生e增加经验值jyz
 {
     LNode *p;
     p=L->next;
     while (p&&p->data.no!=e.no)         //p不为空,并且查找满足条件的序号(p->data.no!=e.no),匹配到如果相等就退出循环
     {
-        p=p->next;                      //指向下一个数据域
+        p=p->next;                      //指向下一个数据域,寻找满足条件的结点    
     }
     if(!p)
         return 0;
@@ -112,13 +112,13 @@ int jia(LinkList L,ElemType e,int jyz)
     }
 }
 
-int jian(LinkList L,ElemType e,int jyz)
+int jian(LinkList L,ElemType e,int jyz)     //为学生e减少经验值jyz
 {
     LNode *p;
     p = L->next;
     while (p&&p->data.no!=e.no)         //p不为空,并且查找满足条件的序号(p->data.no!=e.no),匹配到如果相等就退出循环
     {
-        p=p->next;                      //指向下一个数据域
+        p=p->next;                      //指向下一个数据域,寻找满足条件的结点    
     }
     if(!p)
         return 0;
