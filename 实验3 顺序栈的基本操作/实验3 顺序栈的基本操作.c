@@ -123,7 +123,8 @@ int main()
                 printf("\n\n");
                 break;
             default:
-                printf("请输入正确的序号来进行相应的计算\n\n");
+                if(choose!=0)
+                    printf("请输入正确的序号来进行相应的计算\n\n");
         }
     }
     return 0;
