@@ -151,7 +151,7 @@ int main()
     choose=-1;
     while (choose!=0)
     {
-        printf("请选择:");
+        printf("\n请选择:");
         scanf("%d",&choose);
         switch (choose) {
             case 1:
@@ -176,7 +176,6 @@ int main()
                     scanf("%d",&b.jyz);
                     ListInsert_L(&L, i,&b);
                 }
-                printf("\n");
                 break;
             case 3:
                 printf("请输入所要查找的学生学号");
@@ -220,7 +219,6 @@ int main()
                     printf("%d %s %d\n",p->data.no,&p->data.name,p->data.jyz);
                     p=p->next;
                 }
-                printf("\n\n");
                 break;
             case 7:
                 printf("请输入所要加经验值的学生学号:");
