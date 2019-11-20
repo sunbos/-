@@ -37,12 +37,13 @@ LNode *LocateElem_L(LinkList L,ElemType e)      //按元素值查找
     return p;                               //返回L中的值为e的数据元素的位置，查找失败返回NULL
 }
 
-Status ListInsert_L(LinkList L,int i,ElemType e)    //单链表的插入
+Status ListInsert_L(LinkList *L,int i,ElemType *e)    //单链表的插入
 {
     //在带头结点的单链表L中第i个位置之前插入元素e
     int j;
     LNode *p,*s;
-    p=L;j=0;
+    p=(*L);
+    j=0;
     while (p&&j<i-1)    //寻找第i-1个节点
     {
         p=p->next;
@@ -51,18 +52,19 @@ Status ListInsert_L(LinkList L,int i,ElemType e)    //单链表的插入
     if (!p||j>i-1)      //i大于表长+1或者小于1
         return ERROR;
     s =(LinkList)malloc(sizeof(LNode));     //生成新节点s
-    s->data = e;                            //将结点的数据域置为e
+    s->data = (*e);                         //将结点的数据域置为e
     s->next=p->next;                        //将结点s插入L中
     p->next=s;
     return OK;
 }
 
-Status ListDelete_L(LinkList L,int i,ElemType *e)       //单链表的删除,将要删除的数据域的前一个结点与其断开并插入新的链表
+Status ListDelete_L(LinkList *L,int i,ElemType *e)       //单链表的删除,将要删除的数据域的前一个结点与其断开并插入新的链表
 {
     //在带头结点的单链表L中，删除第i个位置，并由e返回值
     LNode *p,*q;
     int j;
-    p=L;j=0;
+    p=(*L);
+    j=0;
     while (p->next&&j<i-1)          //寻找i-1个结点
     {
         p=p->next;
@@ -77,13 +79,13 @@ Status ListDelete_L(LinkList L,int i,ElemType *e)       //单链表的删除,将
     return OK;
 }
 
-void CreateList_L(LinkList L,int n)         //后插法创建链表
+void CreateList_L(LinkList *L,int n)         //后插法创建链表
 {
     //正位序输入n个元素的值，建立到头结点的单链表L
     LNode *r,*p;
-    L=(LinkList)malloc(sizeof(LNode));
-    L->next=NULL;                           //先建立一个带头结点的空链表
-    r =L;
+    (*L)=(LinkList)malloc(sizeof(LNode));
+    (*L)->next=NULL;                           //先建立一个带头结点的空链表
+    r =(*L);
     scanf("请输入%d个数:\n",&n);
     for (int i=0; i<n; i++)
     {
@@ -95,13 +97,13 @@ void CreateList_L(LinkList L,int n)         //后插法创建链表
     }
 }
 
-int jia(LinkList L,ElemType e,int jyz)      //为学生e增加经验值jyz
+int jia(LinkList *L,ElemType e,int jyz)      //为学生e增加经验值jyz
 {
     LNode *p;
-    p=L->next;
+    p=(*L)->next;
     while (p&&p->data.no!=e.no)         //p不为空,并且查找满足条件的序号(p->data.no!=e.no),匹配到如果相等就退出循环
     {
-        p=p->next;                      //指向下一个数据域,寻找满足条件的结点    
+        p=p->next;                      //指向下一个数据域,寻找满足条件的结点
     }
     if(!p)
         return 0;
@@ -112,13 +114,13 @@ int jia(LinkList L,ElemType e,int jyz)      //为学生e增加经验值jyz
     }
 }
 
-int jian(LinkList L,ElemType e,int jyz)     //为学生e减少经验值jyz
+int jian(LinkList *L,ElemType e,int jyz)     //为学生e减少经验值jyz
 {
     LNode *p;
-    p = L->next;
+    p = (*L)->next;
     while (p&&p->data.no!=e.no)         //p不为空,并且查找满足条件的序号(p->data.no!=e.no),匹配到如果相等就退出循环
     {
-        p=p->next;                      //指向下一个数据域,寻找满足条件的结点    
+        p=p->next;                      //指向下一个数据域,寻找满足条件的结点
     }
     if(!p)
         return 0;
@@ -172,7 +174,7 @@ int main()
                     scanf("%d",&b.no);
                     scanf("%s",&b.name);
                     scanf("%d",&b.jyz);
-                    ListInsert_L(L, i, b);
+                    ListInsert_L(&L, i,&b);
                 }
                 printf("\n");
                 break;
@@ -190,7 +192,7 @@ int main()
                 printf("请输入要插入的新同学的信息:\n");
                 printf("插入的位置   学号  姓名  经验值:\n");
                 scanf("%d%d%s%d",&a,&b.no,&b.name,&b.jyz);
-                if (ListInsert_L(L, i, b))              //元素插入
+                if (ListInsert_L(&L, a,&b))              //元素插入
                 {
                     printf("插入成功.\n");
                 }
@@ -202,7 +204,7 @@ int main()
             case 5:
                 printf("请输入所要删除的离班学生的位置:");
                 scanf("%d",&c);
-                if (ListDelete_L(L, c, &res))
+                if (ListDelete_L(&L, c, &res))
                 {
                     printf("删除成功.\n被删除离班学生是:%d %s\n",res.no,&res.name);
                 }
@@ -225,7 +227,7 @@ int main()
                 scanf("%d",&b.no);
                 printf("请输入所要加的经验值:");
                 scanf("%d",&jyz);
-                temp=jia(L, b, jyz);
+                temp=jia(&L, b, jyz);
                 if (temp!=0)
                 {
                     printf("%d学生的经验值已加%d.\n",b.no,jyz);
@@ -240,6 +242,7 @@ int main()
                 scanf("%d",&b.no);
                 printf("请输入所要减的经验值:");
                 scanf("%d",&jyz);
+                temp=jian(&L, b, jyz);
                 if(temp!=0)
                 {
                     printf("%d学生的经验值已减%d.\n",b.no,jyz);
