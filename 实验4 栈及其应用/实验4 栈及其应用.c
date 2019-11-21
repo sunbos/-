@@ -290,9 +290,9 @@ int main()
         {
             case 1:                                 //建立一个单链表
                 if(InitList_L(&L))
-                    printf("成功建立学生信息表\n");
+                    printf("成功建立学生信息表\n\n");
                 else
-                    printf("学生信息表建立失败\n");
+                    printf("学生信息表建立失败\n\n");
                 break;
             case 2:                                 //使用后插法创建单链表
                 printf("请输入学生人数:");
@@ -300,7 +300,7 @@ int main()
                 ClearList_L(&L);
                 printf("请输入%d个学生信息:\n",n);
                 CreateList_L(&L,n);
-                printf("成功输入%d个学生信息:\n",n);
+                printf("成功输入%d个学生信息\n\n",n);
                 break;
             case 3:                                 //单链表的按序号查找
                 printf("请输入一个位置用来查找:");
@@ -318,7 +318,7 @@ int main()
                 printf("请输入所要查找的学生学号:");
                 scanf("%d",&b.no);
                 if(LocateElem_L(L,b)!=NULL)
-                    printf("查找成功\n%d学生的经验值是 %d.\n",LocateElem_L(L,b)->data.no,LocateElem_L(L,b)->data.jyz);
+                    printf("查找成功\n%d学生的经验值是 %d.\n\n",LocateElem_L(L,b)->data.no,LocateElem_L(L,b)->data.jyz);
                 else
                     printf("查找失败!%d没有找到\n\n",b.no);
                 break;
@@ -361,7 +361,7 @@ int main()
                 scanf("%d",&jyz);
                 if(jia(&L,b,jyz))
                 {
-                    printf("%d学生的经验值已加%d.\n",b.no,jyz);
+                    printf("%d学生的经验值已加%d.\n\n",b.no,jyz);
                     t.opr='+';
                     t.no=b.no;
                     t.jyz=jyz;
@@ -377,7 +377,7 @@ int main()
                 scanf("%d",&jyz);
                 if(jian(&L,b,jyz))
                 {
-                    printf("%d学生的经验值已减%d.\n",b.no,jyz);
+                    printf("%d学生的经验值已减%d.\n\n",b.no,jyz);
                     t.opr='-';
                     t.no=b.no;
                     t.jyz=jyz;
@@ -385,7 +385,7 @@ int main()
                 }
                 else
                 {
-                    printf("查找失败!没有这样的学生信息\n");
+                    printf("查找失败!没有这样的学生信息\n\n");
                 }
                 break;
             case 10:                                //撤销
@@ -401,15 +401,14 @@ int main()
                         b.no=t.no;
                         jia(&L,b,t.jyz);
                     }
-                    printf("撤销成功!\n");
+                    printf("撤销成功!\n\n");
                 }
                 else
-                    printf("无步骤可撤销!\n");
+                    printf("无步骤可撤销!\n\n");
                 break;
         }
 
     }
     DestroyList_L(&L);
     return 0;
-
 }
