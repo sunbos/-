@@ -98,7 +98,7 @@ int main()
                     {
                         //file>>j;
                         Push(&s, j);                     //将字符放到栈里
-                        printf("%c ", j);                //并将它输出
+                        printf("%c", j);                //并将它输出
                         j = fgetc(file);                 //从文件里取出字符
                     }
                     printf("\n");
@@ -117,7 +117,7 @@ int main()
                 printf("依次弹出的栈顶元素为:\n");
                 while (Pop(&s,&t))
                 {
-                    printf("%c ",t);
+                    printf("%c",t);
                 }
                 flag = -1;
                 printf("\n\n");
