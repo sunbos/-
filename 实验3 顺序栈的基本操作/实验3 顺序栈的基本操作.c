@@ -39,7 +39,7 @@ Status Push(SqStack *S,SElemType e)     //顺序栈的入栈
 Status Pop(SqStack *S,SElemType *e)     //顺序栈的出栈
 {
     //删除S的栈顶元素，用e返回其值
-    if(S->base == S->top)       //判断栈是否为空栈
+    if(S->base == S->top-1)       //判断栈是否为空栈
         return ERROR;           //如果是就返回错误
     *e = *(--S->top-1);         //先将栈顶指针，下移一位，然后再将元素取出
     return OK;
