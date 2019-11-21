@@ -41,14 +41,14 @@ Status Pop(SqStack *S,SElemType *e)     //顺序栈的出栈
     //删除S的栈顶元素，用e返回其值
     if(S->base == S->top)       //判断栈是否为空栈
         return ERROR;           //如果是就返回错误
-    *e = *(--S->top);           //先将栈顶指针，下移一位，然后再将元素取出
+    *e = *(--S->top-1);         //先将栈顶指针，下移一位，然后再将元素取出
     return OK;
 }
 
 SElemType GetTop(SqStack S)     //取顺序栈的栈顶元素
 {
     if(S.top != S.base)                 //判断栈是否为空
-        return *(S.top-1);              //如果不为空，返回栈顶指针的下一个元素
+        return *(S.top-2);              //如果不为空，返回栈顶指针的下一个元素，去掉输入流里的\n，所以要S.top-2
     else                                //否则返回错误
         return ERROR;
 }
@@ -62,7 +62,7 @@ int main()
     printf("2.入栈\n");
     printf("3.读取栈顶元素\n");
     printf("4.出栈\n");
-    printf("0.退出\n");
+    printf("0.退出\n\n");
 
     choose = -1;
     while (choose!=0)
@@ -101,7 +101,7 @@ int main()
                         printf("%c ", j);                //并将它输出
                         j = fgetc(file);                 //从文件里取出字符
                     }
-                    printf("\n\n");
+                    printf("\n");
                 } else
                     printf("栈未建立,请重新选择\n\n");
                 fclose(file);                           //file.close()关闭文件file;
